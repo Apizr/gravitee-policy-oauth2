@@ -122,7 +122,8 @@ public class Oauth2Policy {
                             List<String> finalScopes = scopes;
                             scopeIterator.forEachRemaining(jsonNode -> finalScopes.add(jsonNode.asText()));
                         } else {
-                            scopes = Arrays.asList(scopesNode.asText("").split(" "));
+                            String delimiter = oAuth2PolicyConfiguration.getScopeDelimiter();
+                            scopes = Arrays.asList(scopesNode.asText("").split(delimiter));
                         }
 
                         if (scopes.containsAll(oAuth2PolicyConfiguration.getRequiredScopes())) {
